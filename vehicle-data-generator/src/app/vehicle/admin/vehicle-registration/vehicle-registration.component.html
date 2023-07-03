@@ -1,0 +1,160 @@
+<div class="add-registration-container">
+    <div class="page-layout">
+        <div class="page-header">
+            <div class="page-title">
+                <mat-icon class="action-icon">lens_blur</mat-icon> {{'Vehicle Registration'}}
+            </div>
+            <div class="page-action">
+                <button mat-raised-button color="warn" class="action-button" (click)="navigateToPage()" title="{{'Back'}}">
+                    <mat-icon class="action-icon">keyboard_backspace</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <mat-divider class="panel-divider"></mat-divider>
+
+        <div class="page-content">
+            <form [formGroup]="vehicleRegistrationForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'VIN'}} <span class="required-field">*</span></label>
+                            <input class="form-control control-input" formControlName="vin" type="text"
+                                (keypress)="specialChar($event)" minlength="9" maxlength="10" placeholder="Enter VIN" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['vin'].invalid && (vehicleRegistrationForm.controls['vin'].dirty || vehicleRegistrationForm.controls['vin'].touched)"
+                                class="error-msg">{{'VIN is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Reg Number'}} <span class="required-field">*</span></label>
+                            <input class="form-control control-input" formControlName="reg_Number" type="text"
+                                (keypress)="number($event)" maxlength="10" placeholder="Enter Reg Number" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['reg_Number'].invalid && (vehicleRegistrationForm.controls['reg_Number'].dirty || vehicleRegistrationForm.controls['reg_Number'].touched)"
+                                class="error-msg">{{'Reg Number is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Mfg Date'}} <span class="required-field">*</span></label>
+                            <input class="form-control control-input" formControlName="mfg_Date" type="date"
+                                (change)="fetchMfgDate()" placeholder="Enter Mfg Date"  style="
+                                text-transform: uppercase" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['mfg_Date'].invalid && (vehicleRegistrationForm.controls['mfg_Date'].dirty || vehicleRegistrationForm.controls['mfg_Date'].touched)"
+                                class="error-msg">{{'Mfg Date is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Reg Date'}} <span class="required-field">*</span></label>
+                            <input class="form-control control-input" [ngClass]="!(minRegDate) ? 'field-disabled' : ''"
+                                formControlName="reg_Date" type="date" [min]="minRegDate" placeholder="Enter Reg Date" style="
+                                text-transform: uppercase" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['reg_Date'].invalid && (vehicleRegistrationForm.controls['reg_Date'].dirty || vehicleRegistrationForm.controls['reg_Date'].touched)"
+                                class="error-msg">{{'Reg Date is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Warranty Date'}} <span
+                                    class="required-field">*</span></label>
+                            <input class="form-control control-input" formControlName="warranty_Date" type="date"
+                                placeholder="Enter Warranty Date"  style="text-transform: uppercase" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['warranty_Date'].invalid && (vehicleRegistrationForm.controls['warranty_Date'].dirty || vehicleRegistrationForm.controls['warranty_Date'].touched)"
+                                class="error-msg">{{'Warranty Date is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Warranty Coverage'}} <span
+                                    class="required-field">*</span></label>
+                            <select class="form-control control-input" formControlName="warranty_Coverage" required>
+                                <option value="" class="default-select">Select Warranty Coverage</option>
+                                <option *ngFor="let warrantyCoverage of warrantyCoverageData">{{warrantyCoverage.name}}
+                                </option>
+                            </select>
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['warranty_Coverage'].invalid && (vehicleRegistrationForm.controls['warranty_Coverage'].dirty || vehicleRegistrationForm.controls['warranty_Coverage'].touched)"
+                                class="error-msg">{{'Warranty Coverage is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Brand'}} <span class="required-field">*</span></label>
+                            <select class="form-control control-input" formControlName="brand" required>
+                                <option value="" class="default-select">Select Brand</option>
+                                <option *ngFor="let brand of brandData">{{brand.name}}</option>
+                            </select>
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['brand'].invalid && (vehicleRegistrationForm.controls['brand'].dirty || vehicleRegistrationForm.controls['brand'].touched)"
+                                class="error-msg">{{'Brand is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Price'}} <span class="required-field">*</span></label>
+                            <input class="form-control control-input" formControlName="price" type="text"
+                                (keypress)="number($event)" maxlength="10" placeholder="Enter Price" required />
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['price'].invalid && (vehicleRegistrationForm.controls['price'].dirty || vehicleRegistrationForm.controls['price'].touched)"
+                                class="error-msg">{{'Price is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Currency'}} <span class="required-field">*</span></label>
+                            <select class="form-control control-input" formControlName="currency" required>
+                                <option value="" class="default-select">Select Currency</option>
+                                <option *ngFor="let currency of currencyData">{{currency.name}}
+                                </option>
+                            </select>
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['currency'].invalid && (vehicleRegistrationForm.controls['currency'].dirty || vehicleRegistrationForm.controls['currency'].touched)"
+                                class="error-msg">{{'Currency is required.'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4">
+                            <label class="control-label">{{'Selling Dealer'}} <span
+                                    class="required-field">*</span></label>
+                            <select class="form-control control-input" formControlName="selling_Dealer" required>
+                                <option value="" class="default-select">Select Selling Dealer</option>
+                                <option *ngFor="let sellingDealer of sellingDealerData">
+                                    {{sellingDealer.name}}</option>
+                            </select>
+                            <span
+                                *ngIf="vehicleRegistrationForm.controls['selling_Dealer'].invalid && (vehicleRegistrationForm.controls['selling_Dealer'].dirty || vehicleRegistrationForm.controls['selling_Dealer'].touched)"
+                                class="error-msg">{{'Selling Dealer is required.'}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-outline mb-4 form-check">
+                            <input class=" form-check-input" formControlName="is_Insured" type="checkbox" value=""
+                                required>
+                            <label class="control-label form-check-label">{{'Is Insured'}} <span
+                                    class="required-field">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-panel">
+                    <button class="btn btn-primary action-button" (click)="vehicleRegistration(vehicleRegistrationForm.value)" [disabled]="isFromValid()">{{'Submit'}}</button> &nbsp;
+                    <button class="btn btn-primary action-button" (click)="navigateToPage()">{{'Cancel'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog">
+     
+ <changeSet id="USER_TAB_00001" author="USER">
+    <createTable tableName="user">
+	<column name="user_id" type="bigint" autoIncrement="true">
+		<constraints primaryKey="true" primaryKeyName="pk_user_id"
+			nullable="false" />
+	</column>
+	<column name="name" type="varchar(255)">
+		<constraints nullable="false" />
+	</column>
+		<column name="username" type="varchar(255)">
+		<constraints nullable="false" />
+	</column>
+	
+	<column name="password" type="varchar(255)">
+		<constraints nullable="false" />
+	</column>
+	
+	<column name="mobile_no" type="bigint">
+		<constraints nullable="false" />
+	</column>
+
+	<column name="email" type="varchar(255)">
+		<constraints nullable="false" />
+	</column>
+    </createTable>
+	<rollback>
+		<dropTable tableName="user" />
+	</rollback>
+ </changeSet>
+</databaseChangeLog>

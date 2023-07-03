@@ -1,0 +1,47 @@
+secret:
+  5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+spring:
+  application:
+    name: GATEWAY-SERVICE
+    
+  cloud:
+    gateway:
+     globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - OPTIONS
+     routes:
+      - id: vehicle-service
+        uri: lb://VEHICAL-SERVICE
+        predicates:
+        - Path=/v1/api/**
+        filters:
+        - JwtAuthFilter
+        
+      - id: auth-service
+        uri: lb://LOGIN-SERVICE
+        predicates:
+        - Path=/api/auth/**
+        filters:
+         - JwtAuthFilter
+              
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+     
+  instance:
+     hostname: localhost
+   
+server:
+  port: 8989    
+   
+    
+    

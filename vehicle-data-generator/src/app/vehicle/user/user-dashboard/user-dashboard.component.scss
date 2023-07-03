@@ -1,0 +1,146 @@
+.search-container {
+    background: #fff;
+    max-width: 100%;
+  
+    .page-layout {
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #d2d2d2;
+  
+        .page-title {
+          font-weight: 500;
+          color: #e20074;
+          padding: 8px 0;
+          font-size: 16px;
+  
+          .action-icon {
+            vertical-align: middle;
+          }
+        }
+
+        .page-action {
+          .action-button {
+            background: #e20074;
+            display: unset;
+            margin: 0;
+            padding: 0;
+            min-width: 40px;
+            height: 35px;
+  
+            .action-icon {
+              font-size: 20px;
+              font-weight: bold;
+              margin: 0;
+            }
+          }
+        }
+      }
+  
+      .panel-divider {
+        border-top-color: #eee;
+        border-top-width: 10px;
+      }
+  
+      .page-content {
+        padding: 15px;
+        border: 1px solid #d2d2d2;
+  
+        .search-vehicle {
+          .form-outline {
+
+            input[type=number]::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+            }
+
+            .control-label {
+              font-weight: 500;
+              color: #e20074;
+            }
+  
+            .control-input {
+              font-size: 14px;
+              height: 40px;
+            }
+    
+            .control-input:focus {
+              box-shadow: none;
+              border: 1.5px solid #e20074;
+            }
+  
+            .action-button {
+              position: relative;
+              top: 20px;
+              width: 48.5%;
+              top: 22px;
+              background: #e20074;
+              border: none;
+            }
+          }
+        }
+  
+        .filtered-vehicle {
+          .mat-elevation-z8 {
+            table {
+              width: 100%;
+    
+              .action-content {
+                .action-icon {
+                  color: #e20074;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  ::ng-deep .common-dialog {
+    max-width: 95vw !important;
+    height: auto;
+  
+    .common-modal {
+      .modal-head {
+        background: #e20074;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px;
+      }
+  
+      .modal-cont {
+        margin: 0 10px;
+        padding: 10px 0;
+  
+        .registration-content {
+
+          .table-bordered {
+            .table-th {
+              color: #e20074;
+              font-weight: 500;
+            }
+            .action-icon {
+              color: green;
+              font-weight: bold;
+            }
+          }
+
+          .modal-foot {
+            text-align: right;
+
+            .action-button {
+              background: #e20074;
+              display: unset;
+              border: unset;
+              min-width: 40px;
+              height: 35px;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }

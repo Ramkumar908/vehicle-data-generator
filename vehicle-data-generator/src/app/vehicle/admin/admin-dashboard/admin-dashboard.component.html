@@ -1,0 +1,142 @@
+<div class="dashboard-container">
+    <div class="page-layout">
+      <div class="page-header">
+        <div class="page-title">
+          <mat-icon class="action-icon">lens_blur</mat-icon> {{'Registration Details'}}
+        </div>
+        <div class="page-action">
+          <button class="btn btn-primary action-button" (click)="navigateToPage('register')" title="{{'Vehicle Registration'}}">
+            <mat-icon class="action-icon">add</mat-icon>
+          </button> &nbsp;
+          <button class="btn btn-primary action-button" (click)="navigateToPage('search')" title="{{'Search Vehicle'}}">
+            <mat-icon class="action-icon">search</mat-icon>
+          </button> &nbsp;
+          <button class="btn btn-primary action-button" (click)="onExportToExcel()" title="{{'Export to Excel'}}" [disabled]="!dataSource?.filteredData?.length">
+            <mat-icon class="action-icon">arrow_downward</mat-icon>
+          </button>
+        </div>
+      </div>
+  
+      <mat-divider class="panel-divider"></mat-divider>
+  
+      <div class="page-content">
+        <ng-container *ngIf="(dataSource?.filteredData?.length); then dataFound; else dataNotFound"></ng-container>
+       
+        <ng-template #dataFound>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+    
+              <ng-container matColumnDef="vin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Vin'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.vin}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="reg_number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Reg Number'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.reg_Number}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="reg_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Reg Date'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.reg_Date}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="brand">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Brand'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.brand}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="mfg_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'MFG Date'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.mfg_Date}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Price'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="currency">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Currency'}} </th>
+                <td mat-cell *matCellDef="let row"> {{row.currency}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Action'}} </th>
+                <td mat-cell *matCellDef="let row">
+                  <div class="action-content">
+                    <mat-icon class="action-icon" (click)="openDialog(extractedRecordDialog, row)">visibility</mat-icon>
+                  </div>
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">{{'No data found'}}</td>
+              </tr>
+    
+            </table>
+    
+            <mat-paginator *ngIf="!(8 >= dataSource?.filteredData?.length)" [length]="totalLength" [pageSizeOptions]="[8, 16, 24]" (page)="fetchData($event)">
+            </mat-paginator>
+          </div>
+        </ng-template>
+       
+        <ng-template #dataNotFound>
+          <div class="not-found">
+            {{'No Data Found'}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #extractedRecordDialog>
+    <div class="common-modal">
+      <div class="modal-head">{{'Registration Details'}}</div>
+      <div class="modal-cont">
+        <div class="registration-content">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="table-th">{{'Vin'}}</th>
+                <th class="table-th">{{'Reg Number'}}</th>
+                <th class="table-th">{{'Reg Date'}}</th>
+                <th class="table-th">{{'Brand'}}</th>
+                <th class="table-th">{{'MFG Date'}}</th>
+                <th class="table-th">{{'Price'}}</th>
+                <th class="table-th">{{'Currency'}}</th>
+                <th class="table-th">{{'Is Insured'}}</th>
+                <th class="table-th">{{'Warranty Date'}}</th>
+                <th class="table-th">{{'Warranty Coverage'}}</th>
+                <th class="table-th">{{'Selling Dealer'}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{registrationContent.vin}}</td>
+                <td>{{registrationContent.reg_Number}}</td>
+                <td>{{registrationContent.reg_Date}}</td>
+                <td>{{registrationContent.brand}}</td>
+                <td>{{registrationContent.mfg_Date}}</td>
+                <td>{{registrationContent.price}}</td>
+                <td>{{registrationContent.currency}}</td>
+                <td>
+                  <mat-icon class="action-icon">{{(registrationContent.is_Insured) ? 'check' : 'close'}}</mat-icon>
+                </td>
+                <td>{{registrationContent.warranty_Date}}</td>
+                <td>{{registrationContent.warranty_Coverage}}</td>
+                <td>{{registrationContent.selling_Dealer}}</td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <div class="modal-foot">
+            <button class="btn btn-primary action-button" mat-dialog-close>{{'Close'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>

@@ -1,0 +1,73 @@
+.sign-up-container {
+  .sign-up-content {
+    height: 100vh !important;
+
+    .card-body {
+      .page-logo {
+        .app-logo {
+          width: 120px;
+        }
+      }
+
+      .page-title {
+        text-align: center;
+        .app-title {
+          color: #e20074;
+        }
+      }
+
+      .form-container {
+        margin: 0 2.5%;
+        padding: 0 2.5%;
+
+        .form-outline {
+          .control-label {
+            font-weight: 500;
+            color: #e20074;
+
+            .required-field {
+              color: red;
+            }
+          }
+
+          .error-msg {
+            color: red;
+            position: relative;
+            top: 5px;
+            left: 13px;
+          }
+
+          .control-input {
+            font-size: 14px;
+            height: 40px;
+          }
+
+          .control-input:focus {
+            box-shadow: none;
+            border: 1.5px solid #e20074;
+          }
+        }
+
+        .action-panel {
+          text-align: center;
+
+          .action-button {
+            background: #e20074;
+            border: none;
+            width: 50% !important;
+          }
+
+          .create-new {
+            cursor: pointer;
+            color: #e20074;
+            font-weight: 500;
+          }
+
+          .create-new:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="header-container">
+    <header class="header">
+        <nav class="navbar navbar-expand-md header-nav">
+            <a class="navbar-brand">
+                <img class="company-logo-header" src="../../../../assets/header-logo.svg" alt="logo" />
+            </a>
+            <div class="collapse navbar-collapse justify-content-start">
+                <div class="navbar-bar">
+                    <!-- <a class="nav-item nav-link">About</a> -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <mat-icon class="person-icon">person</mat-icon>
+                <div class="dropdown-content">
+                    <!-- <p class="dropdown-item"><mat-icon class="menu-action-icon">person</mat-icon> Profile</p> -->
+                    <p class="dropdown-item" (click)="onLogout()"><mat-icon class="menu-action-icon">logout</mat-icon> Logout</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+</div>

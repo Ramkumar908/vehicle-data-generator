@@ -1,0 +1,140 @@
+<div class="sign-up-container">
+    <section class="sign-up-content">
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-8">
+                    <div class="card rounded-0 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-12">
+                                <div class="card-body p-md-3 mx-md-4">
+                                    <div class="page-logo">
+                                        <img src="../../../assets/login-logo.svg" class="app-logo mt-4" alt="logo">
+                                    </div>
+                                    <div class="page-title">
+                                        <h2 class="mt-3 mb-3 app-title">{{'Sign Up'}}</h2>
+                                    </div>
+
+                                    <form [formGroup]="signUpForm">
+                                        <div class="form-container">
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'Name'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <input class="form-control control-input" formControlName="name"
+                                                            type="text" placeholder="Enter Name" required/>
+                                                        <span
+                                                            *ngIf="signUpForm.controls['name'].invalid && (signUpForm.controls['name'].dirty || signUpForm.controls['name'].touched)"
+                                                            class="error-msg">{{'Name is required.'}}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'User Name'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <input class="form-control control-input"
+                                                            formControlName="username" type="text"
+                                                            placeholder="Enter User Name" maxlength="10" required />
+                                                        <span
+                                                            *ngIf="signUpForm.controls['username'].invalid && (signUpForm.controls['username'].dirty || signUpForm.controls['username'].touched)"
+                                                            class="error-msg">{{'User Name is required.'}}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'Email'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <input class="form-control control-input"
+                                                            formControlName="email" type="text"
+                                                            placeholder="Enter Email" required />
+
+                                                            <div *ngIf="signUpForm.controls['email'].invalid && (signUpForm.controls['email'].dirty || signUpForm.controls['email'].touched)">
+                                        
+                                                            <div *ngIf="signUpForm.controls['email'].errors['pattern']"  class="error-msg">
+                                        
+                                                                Email not valid.
+                                        
+                                                            </div>  
+                                                            </div>
+                                                        <!-- <div
+                                                            *ngIf="signUpForm.controls['email'].invalid && (signUpForm.controls['email'].dirty || signUpForm.controls['email'].touched)"
+                                                            class="error-msg">{{'Email is required.'}} -->
+                                                            <!-- <span *ngIf="signUpForm.controls['email'].errors['pattern']" class="error-msg">
+                                                                {{'Email Not Valid'}}
+                                                            </span> -->
+                                                        
+                                                        <!-- </div> -->
+                                                       
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'Mobile Number'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <input class="form-control control-input"
+                                                            formControlName="mobileNo" type="text"
+                                                            placeholder="Enter Mobile Number" minlength="11" (keypress)="number($event)" required minlength="10" maxlength="10"/>
+                                                        <span
+                                                            *ngIf="signUpForm.controls['mobileNo'].invalid && (signUpForm.controls['mobileNo'].dirty || signUpForm.controls['mobileNo'].touched)"
+                                                            class="error-msg">{{'Mobile Number is required.'}}</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'User Role'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <select class="form-control control-input"
+                                                            formControlName="role" required>
+                                                            <option value="" class="default-select">{{'Select role'}}
+                                                            </option>
+                                                            <option *ngFor="let userRole of userRoleData">
+                                                                {{userRole.role}}
+                                                            </option>
+                                                        </select>
+                                                        <span
+                                                            *ngIf="signUpForm.controls['role'].invalid && (signUpForm.controls['role'].dirty || signUpForm.controls['role'].touched)"
+                                                            class="error-msg">{{'Role is required.'}}</span>
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-outline mb-4">
+                                                        <label class="control-label">{{'Password'}} <span
+                                                                class="required-field">*</span></label>
+                                                        <input class="form-control control-input"
+                                                            formControlName="password" type="password"
+                                                            placeholder="Enter Password" minlength="8" maxlength="16" required />
+                                                        <span
+                                                            *ngIf="signUpForm.controls['password'].invalid && (signUpForm.controls['password'].dirty || signUpForm.controls['password'].touched)"
+                                                            class="error-msg">{{'Password is required.'}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="action-panel pt-1 mb-5 pb-1">
+                                                <button class="btn btn-primary action-button w-100 mb-3"
+                                                    [disabled]="isFromValid()" (click)="onSignUp(signUpForm.value)">
+                                                    {{'Sign Up'}}
+                                                </button>
+                                                <p class="big mb-0">
+                                                    {{'Already have an account ?'}}
+                                                    <span class="create-new" [routerLink]="['/auth/login']">{{'Login'}}</span>
+                                                </p>
+                                            </div>     
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
